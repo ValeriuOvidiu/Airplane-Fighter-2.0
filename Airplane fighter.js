@@ -312,21 +312,22 @@ function shoot(timeToShoot) {
     ctx.fillStyle = "white"
     ctx.font = "25px serif";
     ctx.fillText("Ammunition :" + ammunition, ten, 680);
+  } else {
+    ctx.fillStyle = "white"
+    ctx.font = "25px serif";
+    bulletsShootMax = 199
+    ctx.fillText("Ammunition : reload", ten, 680);
   }
   for (let i = bulletsShootMin; i < bulletsShootMax; ++i) {
     if (bullets[i].x == 900) {
       bullets[i].x = flyingPlane.x
     }
-    if (i == 198) {
+    if (bulletsShootMax == 198) {
       space = null
       clearInterval(bulletsIntervalId)
-      ctx.fillStyle = "white"
-      ctx.font = "25px serif";
-      bulletsShootMax = 199
-      ctx.fillText("Ammunition : reload", ten, 680);
-      if (bullets[i].y <= 0) {
-        reload()
-      }
+    }
+    if (bulletsShootMin == 198) {
+      reload()
     }
     for (let j = startOfSegment; j < endOfSegment; ++j) {
       if (arrayOfObstacles[j].x + arrayOfObstacles[j].radius > bullets[i].x && arrayOfObstacles[j].x - arrayOfObstacles[j].radius < bullets[i].x && bullets[i].y < arrayOfObstacles[j].y + arrayOfObstacles[j].radius && bullets[i].y > arrayOfObstacles[j].y - arrayOfObstacles[j].radius / 2) {
